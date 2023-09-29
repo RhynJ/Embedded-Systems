@@ -16,10 +16,10 @@
 #define BTN4_PIN PG_3 // No pull down
 
 // Inputs
-DigitalIn SW2(BTN1_PIN);
-DigitalIn SW3(BTN2_PIN);
-DigitalInOut SW4(BTN3_PIN,PIN_INPUT,PullDown,0);
-DigitalInOut SW5(BTN4_PIN,PIN_INPUT,PullDown,0);
+DigitalIn SW2(BTN1_PIN);    //A
+DigitalIn SW3(BTN2_PIN);    //B
+DigitalInOut SW4(BTN3_PIN,PIN_INPUT,PullDown,0);    //C
+DigitalInOut SW5(BTN4_PIN,PIN_INPUT,PullDown,0);    //D
 
 // Outputs
 DigitalOut ledRed(TRAF_RED1_PIN);
@@ -40,6 +40,20 @@ int main()
         } else {
             ledYel = 0;
         }
+
+
+        if (SW4.read() == 1)
+        {
+            ledGrn = 1;
+
+        }else ledGrn = 0;
+
+        
+        if (SW5.read() == 1)
+        {
+            ledGrn = 1;
+
+        }else ledGrn = 0;
     }
 }
 

@@ -29,6 +29,7 @@ int main()
     
     printf("You entered %d correct integer values. The value was %dms\n", parsed, delay_ms);
 
+
     // Stop
     while (parsed > 0) {
         wait_us(delay_ms * 1000);

@@ -19,6 +19,14 @@ int main() {
     //Create and Initialise 
     ComplexNumber_C q = {1.0, 1.0};
 
+    // y.real = p.real + q.real;
+    // y.imag = p.imag + q.imag;#
+    ComplexNumber_C y = {p.real + q.real, p.imag + q.imag};
+
+    printf("real : %f\n", y.real);
+    printf("imag : %f\n", y.imag);
+
+
     // TASK:
     // Create another complex number y
     // Calculate the complex sum of p and q and store in y

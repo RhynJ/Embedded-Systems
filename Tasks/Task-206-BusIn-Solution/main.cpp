@@ -20,10 +20,16 @@
 // DigitalIn SW3(BTN2_PIN);
 // DigitalInOut SW4(BTN3_PIN,PIN_INPUT,PullDown,0);
 // DigitalInOut SW5(BTN4_PIN,PIN_INPUT,PullDown,0);
-BusInOut switches(BTN3_PIN, BTN4_PIN);
+BusInOut switches(BTN3_PIN, BTN4_PIN, BTN1_PIN, BTN2_PIN);
+
+
+
 
 // Outputs
 BusOut leds(TRAF_RED1_PIN, TRAF_YEL1_PIN, TRAF_GRN1_PIN);
+
+
+
 
 int main()
 {
@@ -36,11 +42,7 @@ int main()
         uint8_t switch_state = switches;
 
         // Update
-        if (switch_state == 3) {
-            leds = 7;
-        } else {
-            leds = 0;
-        }
-    }
-}
+        leds = switch_state;
 
+}
+}

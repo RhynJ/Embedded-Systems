@@ -1,5 +1,6 @@
 #include "uop_msb.h"
 #include <cstring>
+#include <tuple>
 using namespace uop_msb;
 
 // Inputs
@@ -15,6 +16,7 @@ DigitalOut ledGrn(TRAF_GRN1_PIN);
 // Timers (modified version from Timer)
 TimerCompat tmr_debounce2;
 TimerCompat tmr_debounce3;
+TimerCompat tmr_debounceB;
 TimerCompat tmr_flash;
 
 // Switch states
@@ -25,8 +27,11 @@ typedef enum {
   WAITING_2
 } SWITCH_STATE;
 
+int frequency = 100;
+
 SWITCH_STATE sw_state2 = WAIT_FOR_PRESS;
 SWITCH_STATE sw_state3 = WAIT_FOR_PRESS;
+SWITCH_STATE sw_stateB = WAIT_FOR_PRESS;
 
 int main() {
   // Start flashing timer
@@ -38,11 +43,13 @@ int main() {
     long long flash_time = tmr_flash.read_ms();
     int sw2 = SW2.read();
     int sw3 = SW3.read();
+    int swb = SWB.read(); 
     long long sw2_time = tmr_debounce2.read_ms();
     long long sw3_time = tmr_debounce3.read_ms();
+    long long swB_time = tmr_debounceB.read_ms();
 
     // Update yellow LED state and mealy outputs
-    if (flash_time >= 500) {
+    if (flash_time >= frequency) {
       ledYel = !ledYel;
       tmr_flash.reset();
     }
@@ -119,5 +126,45 @@ int main() {
     default:
       sw_state3 = WAIT_FOR_PRESS;
     }
+
+
+    switch (sw_stateB) {
+
+    case WAIT_FOR_PRESS:
+      if (swb == 1) {
+        sw_stateB = WAITING_1;
+        tmr_debounceB.start();
+      }
+      break;
+    case WAITING_1:
+      if (swB_time >= 300) {
+        sw_stateB = WAIT_FOR_REL;
+        tmr_debounceB.stop();
+        tmr_debounceB.reset();
+      }
+      break;
+
+    case WAIT_FOR_REL:
+      if (swb == 0) {
+        sw_stateB = WAITING_2;
+        tmr_debounceB.start();
+      }
+      break;
+    case WAITING_2:
+      if (swB_time >= 300) {
+        sw_stateB = WAIT_FOR_PRESS;
+        tmr_debounceB.stop();
+        tmr_debounceB.reset();
+        printf("Please enter a new frequency:\t");
+        scanf("%d", &frequency);
+        printf("\n\n");
+        printf("You entered : %d \n", frequency);
+      }
+      break;
+
+    default:
+      sw_stateB= WAIT_FOR_PRESS;
+    }
   }
 }
+

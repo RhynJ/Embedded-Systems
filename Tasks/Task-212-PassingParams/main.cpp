@@ -1,22 +1,9 @@
 #include "mbed.h"
+#include "complexSum.hpp"
 
 
 
-typedef struct {
-  double real;
-  double imag;
-} ComplexNumber_C;
 
-ComplexNumber_C complexAdd(const ComplexNumber_C a, const ComplexNumber_C b) {
-    ComplexNumber_C y = a;
-    y.real += b.real;
-    y.imag += b.imag;
-    return y;
-}
-
-void complexDisplay(const char *strName, const ComplexNumber_C u) {
-    printf("%s = %f + j%f\n", strName, u.real, u.imag);
-}
 
 // TASK - write and test complexConjugate, complexNegate, complexSubtract, complexMagnitude, complexMultiply and complexDivide
 
@@ -29,7 +16,10 @@ int main() {
     complexDisplay("p", p);
     complexDisplay("q", q);
  
+
+    //tells us what finction we want to use and the variables we want to pass it
     ComplexNumber_C sum = complexAdd(p, q);
+    //display the answer using the function 
     complexDisplay("p+q", sum);
 
     

@@ -1,5 +1,7 @@
 #include "mbed.h"
 #include "complexSum.hpp"
+#include "complexConjugate.hpp"
+#include "complexNegate.hpp"
 
 
 
@@ -8,7 +10,7 @@
 // TASK - write and test complexConjugate, complexNegate, complexSubtract, complexMagnitude, complexMultiply and complexDivide
 
 int main() {
-    printf("\n\nTASK312\n");
+    printf("\n\nTASK212\n");
 
     //Create instance of a complex number
     ComplexNumber_C p = {2.0, 3.0};
@@ -22,7 +24,18 @@ int main() {
     //display the answer using the function 
     complexDisplay("p+q", sum);
 
+
+    //Conjugate
+    ComplexNumber_C conjY = complexConj(sum);
+    complexConjDisplay("The conjugate fo this is", conjY);
+
+    //negative
+    //this uses pointers to modify the paramater directly 
+    complexNeg(sum);
+    complexNegDisplay("the negative of this is ",  sum);
+
+
     
-    while (true) {
-    }
+
+
 }

@@ -21,7 +21,7 @@ int main()
     );
 
     //This is critical - turn off blocking
-    serial_port.set_blocking(false);
+    serial_port.set_blocking(0);
     
     //Write strings to the terminal
     char msg1[] = "Press a key to toggle the green LED\n\r";

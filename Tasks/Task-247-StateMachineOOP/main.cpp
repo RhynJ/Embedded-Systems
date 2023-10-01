@@ -2,19 +2,27 @@
 #include "SwitchTimerLedManager.hpp"
 #include <chrono>
 #include <ratio>
+#include "flashingLED.hpp"
 using namespace uop_msb;
 using namespace chrono;
 
 Timer tmrLED;
+Timer tmrLEDR;
+Timer tmrLEDY;
+
 SwitchTimerLedManager fsm1(BTN1_PIN, SwitchTimerLedManager::UP);
 SwitchTimerLedManager fsm2(BTN2_PIN, SwitchTimerLedManager::DOWN);
 
 DigitalOut greenLED(TRAF_GRN1_PIN);     //Green Traffic 1
+DigitalOut redLED(TRAF_RED1_PIN);
+DigitalOut yellowLED(TRAF_YEL1_PIN);
 
 //Dual Digit 7-segment Display
 LatchedLED disp(LatchedLED::SEVEN_SEG);
 
 microseconds timeLED;
+microseconds timeLEDR;
+microseconds timeLEDY;
 
 int main()
 {
@@ -26,6 +34,8 @@ int main()
     
     //Start LED timer
     tmrLED.start();
+    tmrLEDR.start();
+    tmrLEDY.start();
     disp = count;
 
     while (true) {
@@ -34,6 +44,9 @@ int main()
         //Poll inputs
         // **********
         timeLED = tmrLED.elapsed_time();
+        timeLEDR = tmrLEDR.elapsed_time();
+        timeLEDY = tmrLEDY.elapsed_time();
+
         fsm1.readInputs();
         fsm2.readInputs();
 
@@ -51,6 +64,18 @@ int main()
             tmrLED.reset();
         }
 
+
+        if (timeLEDR >= 500ms)
+        {
+            redLED = !redLED;
+            tmrLEDR. reset();
+        }
+
+        if (timeLEDY >= 1000ms)
+        {
+            yellowLED = !yellowLED;
+            tmrLEDY. reset();
+        }
         // UPDATE OUTPUTS
         disp = count;
   

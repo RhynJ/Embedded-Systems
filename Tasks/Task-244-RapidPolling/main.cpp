@@ -39,6 +39,7 @@ int main()
     tmr.start();
 
     // Internal state
+    //this reads the input without blocking 
     int btnA_prev = buttonA;
     int btnB_prev = buttonB;
     int btnA_curr;
@@ -100,7 +101,7 @@ int main()
         }
 
         // LED
-        if (tm >= 250ms) {
+        if (tm >= 10ms * count) {
             greenLED = !greenLED;
             tmr.reset();
         }

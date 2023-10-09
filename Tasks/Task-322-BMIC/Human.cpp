@@ -1,11 +1,3 @@
-//
-//  Human.c
-//  CStructures
-//
-//  Created by Nicholas Outram 
-//  Copyright © 2020 Nicholas Outram. All rights reserved.
-//
-
 #include "Human.h"
 
 static void calculateHumanBMI(Human* h);
@@ -13,7 +5,7 @@ static void calculateHumanBMI(Human* h);
 void displayHuman(const Human* h) {
     printf("Age: %u, Weight: %f, Height: %f, BMI: %f", h->age, h->weight, h->height, h->bmi);
     if (h->bmi>=25.0) {
-        printf("*");
+        printf(" Fat bastard");
     }
     printf("\n");
 }

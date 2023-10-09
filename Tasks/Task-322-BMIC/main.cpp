@@ -7,6 +7,8 @@ int main(int argc, const char * argv[]) {
     // ***************
     // USING THE C API
     // ***************
+    printf("\033[2J");//clears the terminal
+
    
     //Designated initialiser
     Human person = initHuman(45, 97, 1.9);
@@ -18,5 +20,4 @@ int main(int argc, const char * argv[]) {
 
     return 0;
 }
-
 

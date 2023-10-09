@@ -1,12 +1,7 @@
-//
-//  Human.cpp
-//  CPPClasses
-//
-//  Created by Nicholas Outram on 28/09/2017.
-//  Copyright © 2017 Nicholas Outram. All rights reserved.
-//
-
 #include "CHuman.hpp"
+
+
+
 //No pointer is passed as it is hidden - it is called "this"
 CHuman::CHuman(int age, float weight, float height) : _age(age), _weight(weight), _height(height) {
     this->_needsUpdate = true;
@@ -57,8 +52,4 @@ std::ostream& operator << (std::ostream& os, CHuman& h)
     os << h.getBmi();
     return os; //allows chaining
 }
-
-
-
-
 

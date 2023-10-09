@@ -35,6 +35,7 @@ void TrafficLight::flashYellow(bool flash) {
 }
 
 // Moore Machine - update outputs
+//   name of class::funciton name 
 void TrafficLight::updateOutput()
 {
     switch (State)

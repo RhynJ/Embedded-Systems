@@ -1,6 +1,7 @@
 #ifndef ComplexNumber_hpp
 #define ComplexNumber_hpp
 
+#include <memory>
 #include <stdio.h>
 #include <iostream>
 using namespace std;
@@ -80,6 +81,11 @@ public:
         this->imag *= c.imag;
     }
 
+    void div(const ComplexNumber& c){
+        this->real /= c.real;
+        this->imag /= c.imag;
+    }
+
 
     //these are copies
     //Add
@@ -92,17 +98,25 @@ public:
         return ComplexNumber(this->real - c.real, this->imag-c.imag);
     }
 
-
-    ComplexNumber multWith(const ComplexNumber& c){
-        return ComplexNumber(this->real *= c.real, this->imag *= c.imag);
-    }
-
-
-    //this doesnt work well kind does as it is set back to the default but it is not a copy
-    ComplexNumber negated(){
-       return ComplexNumber(this->real -= this->real, this->imag-=this->imag);
-    }
     
+    ComplexNumber multWith(const ComplexNumber& c){
+        return ComplexNumber(this->real * c.real, this->imag * c.imag);
+    }
+
+    //this doesnt work correctly
+    ComplexNumber negated(){
+       return ComplexNumber(this->real * -1, this->imag * -1);
+    }
+
+
+
+    ComplexNumber divWith(const ComplexNumber& c){
+        return ComplexNumber(this->real / c.real, this->imag / c.imag);
+    }
+
+
+
+
 
 
     //Display

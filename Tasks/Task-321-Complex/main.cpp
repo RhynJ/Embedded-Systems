@@ -22,6 +22,9 @@ int main()
     c1_copy.display();
     
     printf("c3 \n");
+
+
+    //when we use copied data we need to make sure that it is not being used in the sum that it is = to
     ComplexNumber c3 = c1.addedTo(c2);
     c3.display();
     c3.conjugate();
@@ -44,15 +47,41 @@ int main()
     c4.neg(c2);
     c4.display();
 
-    c4.negate();
+    ComplexNumber c5 = c4.negated();
     c4.display();
 
     c4.add(c2);
+    c4.add(c2);
     c4.display();
-    c4.negated();
+  
+    c4.mult(c2);
+    c4.display();
+    
+    
+    c2.display();
     c4.display();
 
+
     
+    //this does not work as i cannot use the answer in the formula
+    // c4.multWith(c2);
+    // c4.display();
+    //this works as i am copying it to a new variable 
+
+    c4.display();
+    c2.display();
+    ComplexNumber c6 = c4.multWith(c2);
+    c5.display();
+
+
+
+
+    c4.div(c2);
+    c4.display();
+    
+    ComplexNumber c7 = c4.divWith(c2);
+    c7.display();
+
 
 
     while (true);

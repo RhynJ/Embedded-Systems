@@ -11,6 +11,8 @@ DigitalIn sw4(dBtn);
 
 TrafficLight::LIGHT_STATE s;
 
+    unsigned int i=1;
+    unsigned int u=0;
 
 int main()
 {
@@ -19,7 +21,9 @@ int main()
 
         i++;
 
+        //this will change the rate of the flashing using a function
        lights.setFlashSpeed(i);
+       lights.getflashSpeed();
        
         //Wait for switch press
         while (sw==0 && sw1==0);
@@ -34,8 +38,6 @@ int main()
             s = lights.nextState();
         }
         
-
-
 
 
         //Debounce switch

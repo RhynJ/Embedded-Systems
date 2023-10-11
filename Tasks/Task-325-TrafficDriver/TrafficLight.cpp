@@ -10,6 +10,7 @@ TrafficLight::TrafficLight(PinName redPin, PinName yellowPin, PinName greenPin)
     redLED = 1;
     yellowLED = 0;
     greenLED = 0;
+
     // Timer off
     flashYellow(false);
 }
@@ -20,6 +21,7 @@ TrafficLight::~TrafficLight()
     redLED = 1;
     yellowLED = 0;
     greenLED = 0;
+
 } 
 
 // Interrupt Service Routine (ISR)
@@ -39,6 +41,7 @@ void TrafficLight::flashYellow(bool flash) {
 void TrafficLight:: stop()
 {
     //here are 1 of 2 solutions
+    
     State = STOP;
     updateOutput();
 
@@ -48,15 +51,14 @@ void TrafficLight:: stop()
     // greenLED = 0;
 }
 
-void TrafficLight::setFlashSpeed(double u)
+void TrafficLight::setFlashSpeed(float u)
 {
-    flashSpeed = u *.1;
+    flashSpeed = u /1.1;
 }
 
-double TrafficLight::getflashSpeed()
+void TrafficLight::getflashSpeed()
 {
-
-
+    cout << "The flash speed is " << flashSpeed << "\n" << endl;
 }
 
 
@@ -89,6 +91,7 @@ void TrafficLight::updateOutput()
             redLED = 0;
             flashYellow(true);
             greenLED = 0;
+
             break;                
     }       
 }

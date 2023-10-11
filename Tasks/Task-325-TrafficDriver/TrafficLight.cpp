@@ -1,10 +1,12 @@
 #include "TrafficLight.h"
 
 //Contructor
+                            //these need to alread exist (here they exist in the header file)
 TrafficLight::TrafficLight(PinName redPin, PinName yellowPin, PinName greenPin) 
-                                                        : redLED(redPin), yellowLED(yellowPin), greenLED(greenPin)
+                          :redLED(redPin), yellowLED(yellowPin), greenLED(greenPin)
 {
     // These objects are already initialised in the member initialisation list above
+    //this is always run when the instance is created
     redLED = 1;
     yellowLED = 0;
     greenLED = 0;
@@ -30,9 +32,34 @@ void TrafficLight::flashYellow(bool flash) {
     t.detach(); //Turn off ticker
     if (flash) {
         //Turn on ticker ..... Hmmm, interrupts!
-        t.attach(callback(this, &TrafficLight::yellowFlashISR), 200ms);
+        t.attach(callback(this, &TrafficLight::yellowFlashISR), flashSpeed );
     }
 }
+
+void TrafficLight:: stop()
+{
+    //here are 1 of 2 solutions
+    State = STOP;
+    updateOutput();
+
+    // flashYellow(false);
+    // redLED = 1;
+    // yellowLED = 0;
+    // greenLED = 0;
+}
+
+void TrafficLight::setFlashSpeed(double u)
+{
+    flashSpeed = u *.1;
+}
+
+double TrafficLight::getflashSpeed()
+{
+
+
+}
+
+
 
 // Moore Machine - update outputs
 //   name of class::funciton name 
@@ -66,6 +93,9 @@ void TrafficLight::updateOutput()
     }       
 }
 
+
+
+
 // Moore machine - next state logic
 TrafficLight::LIGHT_STATE TrafficLight::nextState()
 {
@@ -92,3 +122,9 @@ TrafficLight::LIGHT_STATE TrafficLight::nextState()
     //Return the current state (for information)
     return State; 
 } 
+
+
+
+
+
+

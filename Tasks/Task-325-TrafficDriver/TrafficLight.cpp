@@ -2,14 +2,20 @@
 
 //Contructor
                             //these need to alread exist (here they exist in the header file)
-TrafficLight::TrafficLight(PinName redPin, PinName yellowPin, PinName greenPin) 
-                          :redLED(redPin), yellowLED(yellowPin), greenLED(greenPin)
+TrafficLight::TrafficLight(PinName redPin, PinName yellowPin, PinName greenPin,
+                           PinName redpin2, PinName yellowPin2, PinName greenPin2) 
+                          :redLED(redPin), yellowLED(yellowPin), greenLED(greenPin),
+                          redLED2(TRAF_RED2_PIN, PinDirection::PIN_OUTPUT,PinMode::OpenDrainNoPull, 0), yellowLED2(TRAF_YEL2_PIN, PinDirection::PIN_OUTPUT,PinMode::OpenDrainNoPull, 0), greenLED2(TRAF_GRN2_PIN, PinDirection::PIN_OUTPUT,PinMode::OpenDrainNoPull, 0)
 {
     // These objects are already initialised in the member initialisation list above
     //this is always run when the instance is created
     redLED = 1;
     yellowLED = 0;
     greenLED = 0;
+
+    redLED2 = 0;
+    yellowLED2 = 1;
+    greenLED2 = 1;
 
     // Timer off
     flashYellow(false);
@@ -74,6 +80,10 @@ void TrafficLight::updateOutput()
             redLED = 1;
             yellowLED = 0;
             greenLED = 0;
+            
+            redLED2 = 0;
+            yellowLED2 = 1;
+            greenLED2 = 1;
             break;
         case READY:
             flashYellow(false);

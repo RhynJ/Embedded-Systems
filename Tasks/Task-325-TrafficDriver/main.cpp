@@ -16,7 +16,11 @@ TrafficLight::LIGHT_STATE s;
 
 int main()
 {
+
+
     while (true) {
+
+
        
 
         i++;

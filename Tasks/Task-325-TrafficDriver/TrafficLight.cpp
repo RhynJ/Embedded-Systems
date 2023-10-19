@@ -13,9 +13,9 @@ TrafficLight::TrafficLight(PinName redPin, PinName yellowPin, PinName greenPin,
     yellowLED = 0;
     greenLED = 0;
 
-    redLED2 = 0;
+    redLED2 = 1;
     yellowLED2 = 1;
-    greenLED2 = 1;
+    greenLED2 = 0;
 
     // Timer off
     flashYellow(false);
@@ -33,6 +33,7 @@ TrafficLight::~TrafficLight()
 // Interrupt Service Routine (ISR)
 void TrafficLight::yellowFlashISR() {
     yellowLED = !yellowLED;
+    yellowLED2 = !yellowLED2;
 }
 
 // Private member function to switch flasher on or off
@@ -51,10 +52,7 @@ void TrafficLight:: stop()
     State = STOP;
     updateOutput();
 
-    // flashYellow(false);
-    // redLED = 1;
-    // yellowLED = 0;
-    // greenLED = 0;
+
 }
 
 void TrafficLight::setFlashSpeed(float u)
@@ -81,26 +79,41 @@ void TrafficLight::updateOutput()
             yellowLED = 0;
             greenLED = 0;
             
-            redLED2 = 0;
+            redLED2 = 1;
             yellowLED2 = 1;
-            greenLED2 = 1;
+            greenLED2 = 0;
             break;
         case READY:
             flashYellow(false);
-            redLED = 1;
+            redLED = 0;
             yellowLED = 1;
-            greenLED = 0;
+            greenLED = 1;
+
+            redLED2 = 1;
+            yellowLED2 = 0;
+            greenLED2 = 1;
+
             break;
         case GO:
             flashYellow(false);
             redLED = 0;
             yellowLED = 0;
             greenLED = 1;
+
+            redLED2 = 0;
+            yellowLED2 = 1;
+            greenLED2 = 1;
+
             break;
         case WARNING:
             redLED = 0;
             flashYellow(true);
             greenLED = 0;
+
+            redLED2 = 1;
+            greenLED2 = 1;
+
+
 
             break;                
     }       

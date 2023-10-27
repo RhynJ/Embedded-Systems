@@ -15,7 +15,7 @@ int main()
     //Write the value as a string
     cout << d1.asString() << endl;
 
-    //DANGER! THIS IS NOT AS IT LOOKS
+    //DANGER! THIS IS NOT AS IT LOOKS this is instead set to a double number reather than a complex
     //By default, the compiler creates an = operator!
     c1 = c0;
 

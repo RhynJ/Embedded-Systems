@@ -2,6 +2,8 @@
 #define __COMPLEX_NUMBER__
 #include "DoubleNumber.hpp"
 
+
+    //the name of the child-class   //the name of the parent class
 class ComplexNumber : public DoubleNumber {
 private:
 

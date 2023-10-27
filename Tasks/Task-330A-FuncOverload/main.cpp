@@ -29,6 +29,7 @@ public:
     }
 
     //Three overloaded functions
+    //use the same name but does differnet things automatically
     void setValue(double u) {
         _real = u;
     }
@@ -37,6 +38,13 @@ public:
     }
     void setValue(string strVal) {
         _real = stod(strVal);
+    }
+
+
+    //just point to the variable
+    void setValue(DoubleNumber d ){
+        _real = d._real;
+
     }
 
 
@@ -64,6 +72,7 @@ int main()
     n1.setValue(10);
     //pass it a string it gets converted to a float 
     n2.setValue("-3.0");
+
 
 
     //it wont let you

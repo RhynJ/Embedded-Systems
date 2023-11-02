@@ -29,6 +29,7 @@ class MockedTimer : public ITimer {
     virtual void wait_for(milliseconds t) {
         cout << "Timer Blocking" << endl;
         volatile unsigned long n;
+        //this just uses a for loop to make it look like there is a timer
         for (n=0; n<10000*t.count(); n++) {
             asm("nop");
         }

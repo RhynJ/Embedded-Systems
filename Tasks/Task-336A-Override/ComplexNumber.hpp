@@ -62,11 +62,27 @@ public:
     // Override + in the parent class
     ComplexNumber operator+(ComplexNumber& u) {
         ComplexNumber result;
+        DoubleNumber real; 
+        ComplexNumber imag; 
 
-        //TO BE DONE
 
+
+        real =  this->_real;
+        real += u._real;
+
+        imag = this->_imag + u._imag;
+
+
+
+
+        //this will assign the real and the imag parts to the result
+        result._real = real;
+        result._imag = imag;
+
+    
         return result;
     }
 };
 
 #endif
+

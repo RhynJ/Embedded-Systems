@@ -53,7 +53,7 @@ class Flashy : DigitalOut {
 
     //Setter and getter for _inteval
     void setInterval(microseconds t) {
-        _interval = t;
+        _interval = t*2;
         if (_enabled) {
             //Reenable to force update
             disable();
@@ -64,7 +64,7 @@ class Flashy : DigitalOut {
         return _interval;
     }
 
-    //Operator overload
+    //Operator overload 
     void operator=(microseconds t) {
         setInterval(t);
     }

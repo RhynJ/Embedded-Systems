@@ -22,11 +22,17 @@ int main()
     cout << c1.asString() << endl;
 
     //Challenge - try and understand this ;)
+    //this only reads the real part of the complex
     cout << c1.asDoubleNumber().asString() << endl;
 
     //TODO - write an overloaded + operator
     DoubleNumber sum1 = c0 + c1 + d0 + d1;
     cout << sum1 << endl;
+
+
+    //why does the cout funciton not return the correct answer
+    ComplexNumber sum2 = c0 + c1;
+    cout << sum2.asString() << endl;
 
     while (true) {
 

@@ -82,11 +82,18 @@ public:
         this->setValue(s);
         return *this;
     }
+
     bool operator==(DoubleNumber& u)
     {
+        //convert to _real
+        if (this->getValue() == u.getValue())
+        {
+            return true;
+            cout << "this is true" << endl;
+        }
+        //need to convert 
         // Return a true if u is equal to `this`
-        // ** TO BE DONE BY THE STUDENT **
-        return false;
+        else{return false;}
     }
 
     operator double() {
@@ -112,6 +119,12 @@ int main()
 
     DoubleNumber sum = (n0 + n1 + n2 + n3);
     cout << sum << endl;
+
+    DoubleNumber n4(12);
+    if(n4 == 11)
+    {cout << "this is true"<< endl;}
+    else {cout << "this is false" << endl; }
+
 
     while (true) {
 

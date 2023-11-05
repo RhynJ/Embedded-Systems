@@ -30,6 +30,8 @@ int main()
     
     //Create single object on the heap (expensive)
     uint32_t memAtStart = print_memory_info();
+
+    ///here we are allocating a new singular object 
     DataObject *pObj = new DataObject(1.0f, 2.0f);
 
     //Invoke class functions via the pointer
@@ -37,6 +39,7 @@ int main()
     //How much memory has been used
     print_memory_info();
     //Free up memory with delete (not delete [])
+    //here we are deleting that single object 
     delete pObj;
     cout << "Memory should now be returned" << endl;
     print_memory_info();
@@ -77,6 +80,9 @@ int main()
         //Free up the memory
         cout << "Memory before deallocating" << endl;
         print_memory_info();
+        //the distructor will not be called as when we create the array new [] we use the []
+        //this will not call the destructor correctly 
+        //delete buffer;
         delete [] buffer;
         buffer = nullptr;
         

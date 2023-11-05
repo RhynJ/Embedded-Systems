@@ -11,6 +11,7 @@ template<class T, class R>
 class RunningMean {
 private:
     uint32_t N;
+    //means the buffer is expected to be of type T
     T *buffer;
     R sum;
     int index;
@@ -29,12 +30,17 @@ public:
         //Initialise data to known state
         sum = (T)0;
         index = 0;
+        //requests a block of memory to store N of type T
+        //new will return the start address of the block of memory and save it to the buffer. this will only happen if it is able to do so
+        //this will be dedclared at run time 
         buffer = new T[N];  //Allocate memory on the heap
         for (unsigned int n=0; n<N; n++) buffer[n] = (T)0;
     }   
     ~RunningMean() {
         //Give back the memory
         //This is critical unless you want a memory leak!
+        //this will clear the memory for buffer so that it can be sued for something else
+    
         delete [] buffer;
         // See https://docs.microsoft.com/en-us/cpp/cpp/delete-operator-cpp?view=msvc-170 for a disussion on delete []
     }

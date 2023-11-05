@@ -24,7 +24,7 @@ int main()
         if (hasIncreasedBy(fPot, 0.1f)) {
             led1 = 1;
         }
-        else if (hasDecreasedBy<float>(fPot, 0.1f)) {
+        else if (hasDecreasedBy(fPot, 0.1f)) {
             led1 = 0;
         }
 
@@ -36,7 +36,7 @@ int main()
             led2 = 0;
         }
  
-        cout << "Mean: " << addToBuffer<uint16_t, double, 4>(uPot) << endl;
+        cout << "Mean: " << addToBuffer<uint16_t, double, 20>(uPot) << endl;
         wait_us(500000);
     }
 }

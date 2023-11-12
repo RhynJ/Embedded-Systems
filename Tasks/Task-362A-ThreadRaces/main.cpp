@@ -9,6 +9,9 @@ void countDown();
 #define RELEASED 0
 #define PRESSED  1
 
+Mutex counterLock;
+
+
 //Hardware
 DigitalOut red_led(TRAF_RED1_PIN);     //CountUp is in its critical section
 DigitalOut yellow_led(TRAF_YEL1_PIN);  //CountDown is in its critical section
@@ -31,6 +34,7 @@ void countUp()
     //RED MEANS THE COUNT UP FUNCTION IS IN ITS CRITICAL SECTION
     green_led = 1;
     for (unsigned int n=0; n<N; n++) {
+        counterLock.lock();
         counter++; 
         counter++;
         counter++;
@@ -40,7 +44,8 @@ void countUp()
         counter++;
         counter++;
         counter++;
-        counter++;           
+        counter++;         
+        counterLock.unlock();  
     }  
     green_led = 0; 
     
@@ -52,6 +57,7 @@ void countDown()
     //YELLOW MEANS THE COUNT DOWN FUNCTION IS IN ITS CRITICAL SECTION
     yellow_led = 1;
     for (unsigned int n=0; n<N; n++) {
+        counterLock.lock();
         counter--;
         counter--;
         counter--;
@@ -61,7 +67,8 @@ void countDown()
         counter--;
         counter--;
         counter--;
-        counter--;           
+        counter--;        
+        counterLock.unlock();   
     }
     yellow_led = 0;
     
@@ -93,11 +100,15 @@ int main() {
     //Did the counter end up at zero?
     backLight = 1;
     disp.locate(1, 0);
+
+    //this is here so counter isnt written when counter is bing accessed
+    counterLock.lock();
     disp.printf("Counter=%Ld\n", counter);
 
     if (counter == 0) {
         red_led = 0;   
     }
+    counterLock.unlock();
         
     //Now wait forever
     while (true) {

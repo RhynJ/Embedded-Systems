@@ -34,6 +34,7 @@ void countUp()
     //RED MEANS THE COUNT UP FUNCTION IS IN ITS CRITICAL SECTION
     green_led = 1;
     for (unsigned int n=0; n<N; n++) {
+        if(counterLock.trylock_for(5s)){
         counterLock.lock();
         counter++; 
         counter++;
@@ -46,7 +47,12 @@ void countUp()
         counter++;
         counter++; 
         counterLock.unlock();          
-    }  
+        }
+        else{
+            printf(" timed out \n");
+        }
+        
+    }
     green_led = 0; 
     
 }

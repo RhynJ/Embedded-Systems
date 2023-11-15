@@ -14,8 +14,11 @@ int main()
 {
     printf("\r\nTarget started.\r\n");
 
+    //interrupt and thread safe
     Watchdog &watchdog = Watchdog::get_instance();
+    //this tells the watch dog how long it had before it reset the system
     watchdog.start(TIMEOUT_MS);
+    //the button press will kick the dog and reset the timer back to 9 
     button.rise(&trigger);
 
     uint32_t watchdog_timeout = watchdog.get_timeout();
@@ -29,3 +32,8 @@ int main()
         ThisThread::sleep_for(1ms * (TIMEOUT_MS / 10));
     }
 }
+
+
+
+
+

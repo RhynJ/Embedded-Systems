@@ -38,7 +38,12 @@ int main() {
     mainThreadID = ThisThread::get_id();
 
     while (true) {
-        ThisThread::flags_wait_all(1 | 2);  // (1 | 2) => 3 
+        //this means either of the falgs can trigger the event
+        //ThisThread::flags_wait_any(3);  // (1 | 2) => 3 
+        
+        //this means that both flags 1 and 2 have to go up 
+        ThisThread::flags_wait_all(3);
+
         printf("Buttons C and D have been pressed\n");
         ThisThread::sleep_for(50ms);    //Debounce
         ThisThread::flags_clear(1 | 2);     //Clear both flags

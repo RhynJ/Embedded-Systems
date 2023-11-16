@@ -38,7 +38,7 @@ int main() {
     mainThreadID = ThisThread::get_id();
 
     while (true) {
-        //this means either of the falgs can trigger the event
+        //this means either of the flags can trigger the event
         //ThisThread::flags_wait_any(3);  // (1 | 2) => 3 
         
         //this means that both flags 1 and 2 have to go up 

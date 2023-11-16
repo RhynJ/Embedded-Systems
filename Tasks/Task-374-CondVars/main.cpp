@@ -61,7 +61,7 @@ int main()
         printf("Main: Set count to %u\r\n", counter);
 
         //Notify waiting threads that some change has occured
-        cond.notify_all();
+        cond.notify_one();
 
         //Release the lock (and exit the critical section)
         mutex.unlock();

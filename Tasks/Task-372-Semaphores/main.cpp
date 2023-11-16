@@ -7,7 +7,7 @@
 using namespace uop_msb;
  
 Semaphore sem1;
-Semaphore sem2(10);
+Semaphore sem2(5);
 Mutex countLock;
 uint16_t counter = 0;
 Thread t1;
@@ -46,11 +46,13 @@ void descend()
         sw.waitForPress(); //Blocking
 
         led = 1;
+        //checks if it can go any lower and blocks it if it cant 
         sem1.acquire(); //Decrement
         countLock.lock();
         counter--;
         printf("%u\n", counter);
         countLock.unlock();
+        //this will increment it 
         sem2.release(); //Increment
         led = 0;
 

@@ -55,7 +55,6 @@ int main()
 
 
 
-        //each time the board loops around this will increment and be sent as a string
 
 
 

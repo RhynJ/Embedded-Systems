@@ -4,13 +4,18 @@
  */
 #include "mbed.h"
 #include "EthernetInterface.h"
+#include <iostream>
+#include <string>
+using namespace std;
 
 // Network interface
 EthernetInterface net;
 char rbuffer[65];
 
-#define IPV4_HOST_ADDRESS "10.42.0.1"
-#define TCP_SOCKET_PORT 8888
+#define IPV4_HOST_ADDRESS "192.168.137.1"
+#define TCP_SOCKET_PORT 8080
+
+
 
 DigitalIn BlueButton(USER_BUTTON);
 DigitalOut led(LED1);
@@ -27,6 +32,7 @@ int main()
         // Show the network address
         SocketAddress a;
         net.get_ip_address(&a);
+        //this is the ip address of the device we are connected to 
         printf("IP address: %s\n", a.get_ip_address() ? a.get_ip_address() : "None");
 
         // Open a socket on the network interface, and create a TCP connection to the TCP server
@@ -34,8 +40,9 @@ int main()
         socket.open(&net);
 
         //Option 1. Look up IP address of remote machine on the Internet
-        //net.gethostbyname("ifconfig.io", &a);
-        //printf("IP address of site: %s\n", a.get_ip_address() ? a.get_ip_address() : "None");
+        net.gethostbyname("ifconfig.io", &a);
+        //this is the IP address of the network we are connected to 
+        printf("IP address of site: %s\n", a.get_ip_address() ? a.get_ip_address() : "None");
 
         //Option 2. Manually set the address (In a Windows terminal, type ipconfig /all and look for the IPV4 Address for the network interface you are using)
         a.set_ip_address(IPV4_HOST_ADDRESS);
@@ -46,9 +53,17 @@ int main()
         //Connect to remote web server
         socket.connect(a);
 
+
+
+        //each time the board loops around this will increment and be sent as a string
+
+
+
         // Send a simple array of bytes (I've used a string so you can read it)
         char sbuffer[] = "Hello, this is the MBED Board talking!";
         char qbuffer[] = "END";
+
+        
 
         int scount;
         if (BlueButton == 0) {

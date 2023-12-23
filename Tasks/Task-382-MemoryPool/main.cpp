@@ -5,12 +5,25 @@ using namespace uop_msb;
 #include <stdio.h>
 #include <ctype.h>
 #include "sample_hardware.hpp"
+#include "PushSwitch.hpp"
 
 #define SWITCH1_RELEASE 1
 
 void thread1();
 void thread2();
 void switchISR();
+
+//this is faster than using dynamic memory. dynamic memory needs to locate and allocate
+//the memory used. it is also dangerous to use as it is easy to have a memory leak
+//memory can also become fragmented
+//allows you to determin the size of the block of RAM
+
+
+//the use of preallocated memory in is recommended 
+//means the system wont run out of memory after an extened period of time 
+
+//can waster memory if not all of it is used 
+//each block is the same size 
 
 
 //Threads
@@ -40,6 +53,9 @@ Queue<message_t, 16> queue;
 // Call this on precise intervals
 void switchISR() {
     
+    //block if button A is pressed 
+    while(buttonA == 1){};
+
     //Read sample - make a copy
     float sample = 0.01f*(float)(rand() % 100);
 
@@ -74,7 +90,16 @@ void switchISR() {
 //Normal priority thread (consumer)
 void thread1() 
 {      
+
+    PushSwitch button2(BTN2_PIN);
+
+
     while (true) {
+
+
+        if(buttonB == 1){button2.waitForRelease();}
+        
+
         message_t* payload;
 
         //Block on the queue

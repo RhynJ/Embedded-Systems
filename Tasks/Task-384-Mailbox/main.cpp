@@ -13,6 +13,17 @@ void thread2();
 void switchISR();
 
 
+//this can be used to send data between the following
+
+//interrupts to thread 
+//thread to interrupt - needs to be non-blocking 
+//interrupt to interrupt - both ends need to be non-blocking
+//thread to thread - buffering is built in 
+
+
+
+
+
 //Threads
 Thread t1;
 

@@ -2,6 +2,8 @@
 #include <chrono>
 using namespace uop_msb;
 
+
+
 #define WAIT_TIME_MS 100 
 DigitalOut led1(LED1);
 DigitalOut led2(LED2);
@@ -79,7 +81,7 @@ int main()
         }
     
         //Experiment -  uncommend the following line. Are any characters missed?
-        //wait_us(1000000);   //Delay 1 seconds
+        wait_us(1000000);   //Delay 1 seconds
 
     }
 }

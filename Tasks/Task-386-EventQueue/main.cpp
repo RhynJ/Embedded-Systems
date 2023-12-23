@@ -5,6 +5,17 @@ using namespace uop_msb;
 
 #include "mbed_events.h"
 
+//can be sued for the following 
+
+//interrupts can easily defer non-real-time tasks to backgrpund thread (can exit more quickly)
+//can help to avoid race conditions as it allows for queuing of non-re-entanct functions 
+//can be chanied together and allow you to synchronise operations to avoid races and maximise throughtput 
+
+//as you can do much more in a thread than you can in an ISR this makes queuing useful
+
+
+
+
 DigitalOut onBoardLED(LED1);
 DigitalOut redLED(TRAF_RED1_PIN);
 DigitalOut yellowLED(TRAF_YEL1_PIN);
@@ -88,4 +99,6 @@ void addSample(long long dur) {
 //Flashing LED 
 void heartBeat() {
     redLED = !redLED;
+    workerQueue.call_in(0s, printf, "Main is alive \n");
+
 }

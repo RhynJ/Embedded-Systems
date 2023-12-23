@@ -44,7 +44,10 @@ void thread1()
 {    
     while (true) {
         //Read queue - block (with timeout)
+        //this is a pointer of a unsigned int same as int but compiler does something different when doing arithmetic   
         uint32_t* rx;   // Fancy type for a 32-bit integer :)
+
+        //this blocks if there is no data then prints an error after 10 seconds if there is no data
         bool success = queue.try_get_for(10s, &rx); //Blocks for 10s if there is no data
         
         if (success) {
